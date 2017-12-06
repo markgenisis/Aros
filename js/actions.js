@@ -194,7 +194,7 @@ function deleteMenu(x){
 		});
 	}
 }
-function edit_menu(){
+function edit_menu(x){
 	var fd = new FormData();
 	var file_data = $('#menuimage').get(0).files[0];
 	var cat_id = $('#catID').val();
@@ -204,6 +204,7 @@ function edit_menu(){
 	fd.append('editmenu_cat_id',cat_id);
 	fd.append('editnew_menu_name',menu_name);
 	fd.append('editmenu_price',menu_price);
+	fd.append('id',x);
 
 	
 	$.ajax({
@@ -219,12 +220,12 @@ function edit_menu(){
 		success:function(data){
 			console.log(data);
 			if(data=="SUCCESS"){
-				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-green w3-padding'><b>SUCCESS!</b> Menu has been added.</div>");
-				setTimeout(function(){$("#alertMSG").hide("fast");},2000);
+				$("#editMSG_"+x).fadeIn('slow').html("<div class='w3-panel w3-green w3-padding'><b>SUCCESS!</b> Menu has been edited.</div>");
+				setTimeout(function(){$("#editMSG_"+x).hide("fast");},2000);
 				setTimeout(function(){location.reload();},3000);
 			}else if(data == "DUPLICATE"){
-				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-blue w3-padding'><b>DUPLICATE FOUND</b> Entry already exists in database.</div>");
-				setTimeout(function(){$("#alertMSG").hide("fast");},2000);
+				$("#editMSG_"+x).fadeIn('slow').html("<div class='w3-panel w3-blue w3-padding'><b>DUPLICATE FOUND</b> Entry already exists in database.</div>");
+				setTimeout(function(){$("#editMSG_"+x).hide("fast");},2000);
 				setTimeout(function(){location.reload();},3000);
 			}else{
 				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-red w3-padding'><b>ERROR!</b> Please try again.</div>");

@@ -321,7 +321,8 @@ $(function() {
                                 </div>
                                 <div class="w3-container w3-white">
                                 		<div class="" id="new_menu_container">
-                                        <form onsubmit="edit_menu()" action="javascript:void(0);" method="post" enctype="multipart/form-data">
+                                		<div id="editMSG_<?php echo $row['id']; ?>"></div>
+                                        <form onsubmit="edit_menu(<?php echo $row['id']; ?>)" action="javascript:void(0);" method="post" enctype="multipart/form-data">
                                             <label>Category Name:</label>
                                             <select class="w3-input" id="catID" required />
                                                 <option selected disabled value="">Select Menu Category</option>

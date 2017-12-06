@@ -79,6 +79,32 @@ if(isset($_POST['new_menu_name'])){
 	}
 	
 }
+//edit menuf
+if(isset($_POST['editnew_menu_name'])){
+    //echo "<pre>",print_r($_POST),"</pre>";
+    //echo "<pre>",print_r($_FILES),"</pre>";
+    $id=$_POST['id'];
+    $menu_cat_id = $_POST['editmenu_cat_id'];
+    $menu_name = $_POST['editnew_menu_name'];
+    $menu_price = $_POST['editmenu_price'];
+    $menu_img_name = $_FILES['editnew_menu_img']['name'];
+    $tmp_src = $_FILES['editnew_menu_img']['tmp_name'];
+    $destination = "../images/";
+    
+   
+        if(move_uploaded_file($tmp_src,$destination.$menu_img_name)){
+            $insert=$mysqli->query("update menu set `menu`='$menu_name',`price`='$menu_price',`category`='$menu_cat_id',`image`='$menu_img_name' where id='$id'");
+            if($insert){
+                echo "SUCCESS";
+            }else{
+                mysqli_error();
+            }
+        }else{
+            mysqli_error();
+        }
+    
+    
+}
 if(isset($_POST['delMenu'])){
 	$id=$_POST['delMenu'];
 	$del=$mysqli->query("delete from menu where id='$id'") or die();
