@@ -324,26 +324,26 @@ $(function() {
                                 		<div id="editMSG_<?php echo $row['id']; ?>"></div>
                                         <form onsubmit="edit_menu(<?php echo $row['id']; ?>)" action="javascript:void(0);" method="post" enctype="multipart/form-data">
                                             <label>Category Name:</label>
-                                            <select class="w3-input" id="catID" required />
+                                            <select class="w3-input" id="catID<?php echo $row['id']; ?>" required />
                                                 <option selected disabled value="">Select Menu Category</option>
                                                 <?php
-                                                    $cat=$mysqli->query("select * from categories");
-                                                    while($rows=mysqli_fetch_assoc($cat)){
+                                                    $cats=$mysqli->query("select * from categories");
+                                                    while($rows=mysqli_fetch_assoc($cats)){
                                                 ?>
                                                     <option <?php if($row['category']==$rows['id']) echo "selected"; ?> value="<?php echo $rows['id']; ?>"><?php echo $rows['category']; ?></option>
                                                 <?php } ?>
                                             </select>
                                             <label>Menu Name:</label>
-                                            <input type="text" class="w3-input" id="menuname" value="<?php echo $row['menu']; ?>" required />
+                                            <input type="text" class="w3-input" id="menuname<?php echo $row['id']; ?>" value="<?php echo $row['menu']; ?>" required />
                                             <label>Price:</label>
-                                            <input type="text" class="w3-input" id="menuprice" value="<?php echo $row['price']; ?>" required />
+                                            <input type="text" class="w3-input" id="menuprice<?php echo $row['id']; ?>" value="<?php echo $row['price']; ?>" required />
                                             <label>Image:</label>
-                                            <input type="file" class="w3-input" id="menuimage"  required />
+                                            <input type="file" class="w3-input" id="menuimage<?php echo $row['id']; ?>" />
                                             <input type="submit" class="w3-btn w3-green w3-margin-top" value="ADD MENU">
                                         </form>
                                         </div>
                                         <div class="w3-container" id="preview_container">
-                                            <img id="img_preview_on_select"  width="100%" src=" "/>
+                                            <img id="img_preview_on_select<?php echo $row['id']; ?>"  width="100%" src=" "/>
                                         </div>
                                 </div>
                               </div>
