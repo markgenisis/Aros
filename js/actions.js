@@ -194,3 +194,44 @@ function deleteMenu(x){
 		});
 	}
 }
+function edit_menu(){
+	var fd = new FormData();
+	var file_data = $('#menuimage').get(0).files[0];
+	var cat_id = $('#catID').val();
+	var menu_name = $('#menuname').val();
+	var menu_price = $('#menuprice').val();
+	fd.append('editnew_menu_img',file_data);
+	fd.append('editmenu_cat_id',cat_id);
+	fd.append('editnew_menu_name',menu_name);
+	fd.append('editmenu_price',menu_price);
+
+	
+	$.ajax({
+		url:"../include/actions.php",
+		type:'post',
+		cache:false,
+		contentType:false,
+		processData:false,
+		data:fd,
+		beforeSend:function(){
+			
+		},
+		success:function(data){
+			console.log(data);
+			if(data=="SUCCESS"){
+				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-green w3-padding'><b>SUCCESS!</b> Menu has been added.</div>");
+				setTimeout(function(){$("#alertMSG").hide("fast");},2000);
+				setTimeout(function(){location.reload();},3000);
+			}else if(data == "DUPLICATE"){
+				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-blue w3-padding'><b>DUPLICATE FOUND</b> Entry already exists in database.</div>");
+				setTimeout(function(){$("#alertMSG").hide("fast");},2000);
+				setTimeout(function(){location.reload();},3000);
+			}else{
+				$("#alertMSG").fadeIn('slow').html("<div class='w3-panel w3-red w3-padding'><b>ERROR!</b> Please try again.</div>");
+				setTimeout(function(){$("#alertMSG").hide("fast");},2000);
+				setTimeout(function(){location.reload();},3000);
+			}
+		}
+	});
+
+}
