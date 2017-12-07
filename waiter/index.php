@@ -236,7 +236,7 @@ $(window).bind('scroll', function () {
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
 			<ul class="w3-ul w3-hoverable">
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
+			  <!-- FOR PULLING --><li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
 			</ul>
 		</div>
 		<!--- PUTAHE Container -->
