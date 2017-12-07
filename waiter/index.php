@@ -161,14 +161,17 @@ $(window).bind('scroll', function () {
 		<div class="w3-row" id="menu_bar" >
 			<div class="w3-row" style=''>
 				<div class="w3-bar w3-purple w3-card-2" >
-				  <a href="#" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Christorey Opao</a>
+				  <!-- <a href="#" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Christorey Opao</a>-->
 				  <a href="#" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-medium w3-hide-large"><i class="fa fa-user fa-1x"></i></a>
 				  <div class="w3-dropdown-hover w3-hide-medium w3-hide-large">
 					  <button class="w3-button">MENU CATEGORY <i class="fa fa-caret-down fa-lg"></i></button>
 					  <div class="w3-dropdown-content w3-bar-block w3-border">
-						<a href="#" class="w3-bar-item w3-button w3-small">PASTA</a>
-						<a href="#" class="w3-bar-item w3-button w3-small">PIZZA</a>
-						<a href="#" class="w3-bar-item w3-button w3-small">COMBO MEAL</a>
+						<?php $categories=$mysqli->query("select * from categories");
+						  while($cat=mysqli_fetch_assoc($categories)){
+						?>
+						<a href="#" class="w3-bar-item w3-button w3-small"><?php echo $cat['category'];?></a>
+						<?php } ?>
+						
 					  </div>
 					</div>
 				  <a href="logout.php" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small w3-right">Logout</a>
@@ -187,9 +190,11 @@ $(window).bind('scroll', function () {
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Menu Categories</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Menu Categories</strong>
 			 <div class="w3-block">
-				<a href="#" class="w3-bar-item w3-button">Pizza</a>
-				<a href="#" class="w3-bar-item w3-button">Pasta</a>
-				<a href="#" class="w3-bar-item w3-button">Combo Meals</a>
+				<?php $categories=$mysqli->query("select * from categories");
+						  while($cat=mysqli_fetch_assoc($categories)){
+						?>
+						<a href="?cat=<?php echo $cat['id'];?>" class="w3-bar-item w3-button w3-small"><?php echo $cat['category'];?></a>
+						<?php } ?>
 			</div>
 		</div>
 		<!--- Side Menu List -->
@@ -197,15 +202,19 @@ $(window).bind('scroll', function () {
 		<!--- PUTAHE Container -->
 		<div class="w3-half putahe_container w3-padding" id="center_putahe">
 			<div class="w3-row-padding">
+			<?php if(isset($_GET['cat'])){
+			 $menu=$mysqli->query("select * from menu where category='{$_GET['cat']}'");
+			 while($list=mysqli_fetch_assoc($menu)){
+			    ?>
 				<div class="w3-third" >
 					<div class="w3-row">
 						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
 							<div class="">
-								<p style="font-size:1.2em;text-align:"><i><strong>Chicken Sisig</strong></i></p>
+								<p style="font-size:1.2em;text-align:"><i><strong><?php echo $list['menu']; ?></strong></i></p>
 							</div>
 							<div style="height:100%; width:100%">
-							  <img src="../images/sisig.jpg" width="100%"/>
-								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; 2,000.00</div>
+							  <img src="../images/<?php echo $list['image']; ?>" width="100%" height="150"/>
+								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; <?php echo number_format($list['price'],2); ?></div>
 							</div>
 							<div class="" style="position:relative;top:7px">
 								<button class="w3-btn w3-teal w3-block add_order_btn" id="">Add to Orders</button>
@@ -213,54 +222,7 @@ $(window).bind('scroll', function () {
 						</div>
 					</div>
 				</div>
-				<div class="w3-third" >
-					<div class="w3-row">
-						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
-							<div class="">
-								<p style="font-size:1.2em;text-align:"><i><strong>Chicken Sisig</strong></i></p>
-							</div>
-							<div style="height:100%; width:100%">
-							  <img src="../images/sisig.jpg" width="100%"/>
-								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; 2,000.00</div>
-							</div>
-							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block">Add to Orders</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="w3-third" >
-					<div class="w3-row">
-						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
-							<div class="">
-								<p style="font-size:1.2em;text-align:"><i><strong>Chicken Sisig</strong></i></p>
-							</div>
-							<div style="height:100%; width:100%">
-							  <img src="../images/sisig.jpg" width="100%"/>
-								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; 2,000.00</div>
-							</div>
-							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block">Add to Orders</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="w3-third" >
-					<div class="w3-row">
-						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
-							<div class="">
-								<p style="font-size:1.2em;text-align:"><i><strong>Chicken Sisig</strong></i></p>
-							</div>
-							<div style="height:100%; width:100%">
-							  <img src="../images/sisig.jpg" width="100%"/>
-								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; 2,000.00</div>
-							</div>
-							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block">Add to Orders</button>
-							</div>
-						</div>
-					</div>
-				</div>
+			<?php } }?>	
 			</div>
 		</div>
 		<!--- PUTAHE Container -->
@@ -274,14 +236,6 @@ $(window).bind('scroll', function () {
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
 			<ul class="w3-ul w3-hoverable">
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
 			  <li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
 			</ul>
 		</div>
