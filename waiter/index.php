@@ -245,5 +245,4 @@ $(window).bind('scroll', function () {
 <!--------- MEnu Container ------>
 
 </body>
-</html>
->>>>>
+</html> 
