@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2017 at 10:27 AM
+-- Generation Time: Jan 02, 2018 at 11:17 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -14,6 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `aros`
@@ -39,7 +40,8 @@ CREATE TABLE `accounts` (
 INSERT INTO `accounts` (`id`, `username`, `password`, `type`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
 (2, 'cashier', '6ac2470ed8ccf204fd5ff89b32a355cf', 2),
-(3, 'mark', '8da5c3e9f3bafb9ac43ca21cc591308d', 4);
+(3, 'mark', '8da5c3e9f3bafb9ac43ca21cc591308d', 4),
+(4, 'cook', 'e3e90fd6d2a7c4661a1a3acf2f60bc6d', 3);
 
 -- --------------------------------------------------------
 
@@ -74,6 +76,14 @@ CREATE TABLE `menu` (
   `image` varchar(255) NOT NULL,
   `availability` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `menu`, `price`, `category`, `image`, `availability`) VALUES
+(3, 'Turkishs', '100', 1, 'BUPC.jpg', 1),
+(4, 'Me', '1500', 1, 'samyang.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +165,7 @@ ALTER TABLE `waiters`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -165,7 +175,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tables`
 --
