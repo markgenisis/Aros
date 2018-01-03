@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "dbconn.php";
 
 if(isset($_POST['username'])){
@@ -128,7 +129,9 @@ if(isset($_POST['removeOrder'])){
 	unset($_SESSION['orders'][$_POST['removeOrder']]);
 }
 if(isset($_POST['menu_id'])){
-	 
+	if(!isset($_SESSION['orders'])){
+		$_SESSION['orders'] = array();
+	}
 		array_push($_SESSION['orders'], $_POST['menu_id'].",".$_POST['quantity'].",".$_POST['table_Num']);
 	 
 	print_r($_SESSION['orders']);

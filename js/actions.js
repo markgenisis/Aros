@@ -248,6 +248,7 @@ function setTable(){
 		});
 }
 function addOrder(id){
+	alert(id);
 	var menu=$("#menu_id_"+id).val();
 	var quantity=$("#quantity_"+id).val();
 	var tableNum=$("#table_number").val();
@@ -260,6 +261,7 @@ function addOrder(id){
 			url: "../include/actions.php",
 			data:"menu_id="+menu+"&quantity="+quantity+"&table_Num="+tableNum,
 			success: function(data){
+				//alert(data);
 				console.log(data)
 				$("#menu_"+id).hide();
 				location.reload();

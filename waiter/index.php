@@ -215,7 +215,7 @@ $(window).bind('scroll', function () {
 								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; <?php echo number_format($list['price'],2); ?></div>
 							</div>
 							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block add_order_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
+								<button class="w3-btn w3-teal w3-block add_odrder_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
                                 
                                 <!-- The Modal -->
                                     <div id="menu_<?php echo $list['id']; ?>" class="w3-modal" >
@@ -263,6 +263,7 @@ $(window).bind('scroll', function () {
               <li>Order #1 <span class="w3-badge">3pcs</span> <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li> -->
               <?php
 			  $total=0;
+			//  print_r($_SESSION['orders']);
 			  	foreach($_SESSION['orders'] as $key => $val){
 			  		$order=explode(",",$val);
 					
