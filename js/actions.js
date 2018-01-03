@@ -262,7 +262,7 @@ function addOrder(id){
 			success: function(data){
 				console.log(data)
 				$("#menu_"+id).hide();
-				location.reload();
+				
 			}
 		});
 	}
