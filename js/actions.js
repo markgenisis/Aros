@@ -262,6 +262,7 @@ function addOrder(id){
 			success: function(data){
 				console.log(data)
 				$("#menu_"+id).hide();
+				location.reload();
 			}
 		});
 	}
@@ -273,7 +274,7 @@ function removeOrder(x){
 			url: "../include/actions.php",
 			data:"removeOrder="+x,
 			success: function(data){
-				console.log(data)
+				location.reload();
 			}
 		});
 	 }
