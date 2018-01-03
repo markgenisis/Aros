@@ -262,14 +262,17 @@ $(window).bind('scroll', function () {
 			  <!-- FOR PULLING
               <li>Order #1 <span class="w3-badge">3pcs</span> <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li> -->
               <?php
+			  $total=0;
 			  	foreach($_SESSION['orders'] as $key => $val){
 			  		$order=explode(",",$val);
 					
 					if($order[2]==$_SESSION['table_num']){
 			  ?>
-              		<li><?php getMenu($order[0]); ?> <span class="w3-badge"><?php echo $order[1]; ?></span> <span class='w3-right'><?php echo number_format((getPrice($order[0])*$order[1]),2); ?> <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-              <?php } } ?>
+              		<li> <span class="w3-badge"><?php echo $order[1]; ?> </span> <?php getMenu($order[0]); ?> <span class='w3-right'><?php echo number_format((getPrice($order[0])*$order[1]),2); ?> <a href='javascript:void(0);' onClick="removeOrder(<?php echo $key; ?>)"><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
+              <?php $total=$total+getPrice($order[0])*$order[1]; } } ?>
 			</ul>
+            <hr>
+            <div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
 		</div>
 		<!--- PUTAHE Container -->
 		

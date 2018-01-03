@@ -266,3 +266,15 @@ function addOrder(id){
 		});
 	}
 }
+function removeOrder(x){
+	 if(confirm("Do you want to remove this order?")){
+	$.ajax({
+			type: "POST",
+			url: "../include/actions.php",
+			data:"removeOrder="+x,
+			success: function(data){
+				console.log(data)
+			}
+		});
+	 }
+}
