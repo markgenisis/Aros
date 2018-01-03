@@ -13,8 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/w3.css">
 <link rel="stylesheet" type="text/css" href="../google/fafa.css">
-<link rel="stylesheet" type="text/css" href="../js/jquery.min.js">
-<link rel="stylesheet" type="text/css" href="../js/jquery.js">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <style>
 .bar-item:hover{
@@ -217,7 +215,31 @@ $(window).bind('scroll', function () {
 								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; <?php echo number_format($list['price'],2); ?></div>
 							</div>
 							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block add_order_btn" id="">Add to Orders</button>
+								<button class="w3-btn w3-teal w3-block add_order_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
+                                
+                                <!-- The Modal -->
+                                    <div id="menu_<?php echo $list['id']; ?>" class="w3-modal" >
+                                      <div class="w3-modal-content w3-animate-top" style="max-width:400px;">
+                                      	<div class="w3-container w3-purple">
+                                         <span onclick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='none'" 
+                                          class="w3-button w3-display-topright">&times;</span>
+                                          <h3><?php echo $list['menu']; ?> Quantity</h3>
+                                        </div>
+                                        <div class="w3-container w3-padding">
+                                        <input type="hidden" id="menu_id_<?php echo $list['id']; ?>" value="<?php echo $list['id']; ?>" >
+                                         <label>Select Quantity:</label>
+                                          <select class="w3-input" id="quantity_<?php echo $list['id']; ?>">
+                                          	<?php
+												for($x=1; $x<=10; $x++){
+											?>
+                                            <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
+                                            <?php } ?>
+                                          </select>
+                                          <button class="w3-green w3-btn w3-margin-top" onClick="addOrder(<?php echo $list['id']; ?>);">Add to Orders</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
 							</div>
 						</div>
 					</div>
@@ -233,10 +255,20 @@ $(window).bind('scroll', function () {
 		</div>
 		
 		<div class="w3-quarter w3-hide-small order_container w3-padding" id="list_of_orders">
+        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if($_SESSION['table_num']== $tables['tablenumber']) echo "selected"; ?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong></h3>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
 			<ul class="w3-ul w3-hoverable">
-			  <!-- FOR PULLING --><li>Order #1  <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
+			  <!-- FOR PULLING
+              <li>Order #1 <span class="w3-badge">3pcs</span> <span class='w3-right'>100.00 <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li> -->
+              <?php
+			  	foreach($_SESSION['orders'] as $key => $val){
+			  		$order=explode(",",$val);
+					
+					if($order[2]==$_SESSION['table_num']){
+			  ?>
+              		<li><?php getMenu($order[0]); ?> <span class="w3-badge"><?php echo $order[1]; ?></span> <span class='w3-right'><?php echo number_format((getPrice($order[0])*$order[1]),2); ?> <a href='javascript:void(0);'><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
+              <?php } } ?>
 			</ul>
 		</div>
 		<!--- PUTAHE Container -->
@@ -244,5 +276,9 @@ $(window).bind('scroll', function () {
 	</div>
 <!--------- MEnu Container ------>
 
+<script type="application/javascript" src="../js/jquery.min.js"></script>
+<script type="application/javascript" src="../js/jquery.js"></script>
+<script type="application/javascript" src="../js/actions.js"></script>
+
 </body>
-</html> 
+</html>

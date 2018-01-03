@@ -166,8 +166,11 @@ $(function() {
     
 		 <div class="w3-col m3 l3"   >
          	<div class="w3-margin w3-padding-small" style="border:purple 5px double; background:black;">
-                 <h4 class="w3-text-white"  >TABLE #: 00</h4>
+                 <h4 class="w3-text-white"  >TABLE #: 00 <span class="w3-badge w3-white w3-right">3</span></h4>
                  <hr>
+                 
+                 <hr>
+             <button class="w3-btn w3-purple">Serve</button>    
             </div>
         </div>  
 		

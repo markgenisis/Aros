@@ -236,3 +236,33 @@ function edit_menu(x){
 	});
 
 }
+function setTable(){
+	var table=$("#table_number").val();
+	$.ajax({
+			type: "POST",
+			url: "../include/actions.php",
+			data:"setTable="+table,
+			success: function(data){
+				console.log(data)
+			}
+		});
+}
+function addOrder(id){
+	var menu=$("#menu_id_"+id).val();
+	var quantity=$("#quantity_"+id).val();
+	var tableNum=$("#table_number").val();
+	if(tableNum==""){
+		alert("Select a Table Number");
+		return false;
+	}else{
+		$.ajax({
+			type: "POST",
+			url: "../include/actions.php",
+			data:"menu_id="+menu+"&quantity="+quantity+"&table_Num="+tableNum,
+			success: function(data){
+				console.log(data)
+				$("#menu_"+id).hide();
+			}
+		});
+	}
+}
