@@ -264,7 +264,7 @@ function addOrder(id){
 				//alert(data);
 				console.log(data)
 				$("#menu_"+id).hide();
-				location.reload();
+				
 			}
 		});
 	}

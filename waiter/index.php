@@ -255,7 +255,7 @@ $(window).bind('scroll', function () {
 		</div>
 		
 		<div class="w3-quarter w3-hide-small order_container w3-padding" id="list_of_orders">
-        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if($_SESSION['table_num']== $tables['tablenumber']) echo "selected"; ?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong></h3>
+        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if(isset($_SESSION['table_num'])){if($_SESSION['table_num'] == $tables['tablenumber']) echo "selected"; }?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong></h3>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
 			<ul class="w3-ul w3-hoverable">
@@ -264,13 +264,14 @@ $(window).bind('scroll', function () {
               <?php
 			  $total=0;
 			//  print_r($_SESSION['orders']);
+			  if(isset($_SESSION['orders'])){
 			  	foreach($_SESSION['orders'] as $key => $val){
 			  		$order=explode(",",$val);
 					
 					if($order[2]==$_SESSION['table_num']){
 			  ?>
               		<li> <span class="w3-badge"><?php echo $order[1]; ?> </span> <?php getMenu($order[0]); ?> <span class='w3-right'><?php echo number_format((getPrice($order[0])*$order[1]),2); ?> <a href='javascript:void(0);' onClick="removeOrder(<?php echo $key; ?>)"><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a> </span></li>
-              <?php $total=$total+getPrice($order[0])*$order[1]; } } ?>
+              <?php $total=$total+getPrice($order[0])*$order[1]; } } }?>
 			</ul>
             <hr>
             <div class="w3-left"><button class="w3-btn w3-purple">Confirm Orders</button></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
@@ -285,4 +286,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html>
+</html>>>>>>
