@@ -248,7 +248,7 @@ function setTable(){
 		});
 }
 function addOrder(id){
-	alert(id);
+	//alert(id);
 	var menu=$("#menu_id_"+id).val();
 	var quantity=$("#quantity_"+id).val();
 	var tableNum=$("#table_number").val();
@@ -264,7 +264,7 @@ function addOrder(id){
 				//alert(data);
 				console.log(data)
 				$("#menu_"+id).hide();
-				
+				location.reload();
 			}
 		});
 	}
@@ -280,4 +280,15 @@ function removeOrder(x){
 			}
 		});
 	 }
+}
+function confirmOrder(){
+	$.ajax({
+			type: "POST",
+			url: "../include/actions.php",
+			data:"confirmOrder=true",
+			success: function(data){
+				location.reload();
+			}
+		});
+	 
 }

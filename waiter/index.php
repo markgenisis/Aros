@@ -274,7 +274,7 @@ $(window).bind('scroll', function () {
               <?php $total=$total+getPrice($order[0])*$order[1]; } } }?>
 			</ul>
             <hr>
-            <div class="w3-left"><button class="w3-btn w3-purple">Confirm Orders</button></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
+            <div class="w3-left"><button class="w3-btn w3-purple" onClick="confirmOrder();">Confirm Orders</button></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
 		</div>
 		<!--- PUTAHE Container -->
 		
@@ -286,4 +286,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html>>>>>>
+</html>

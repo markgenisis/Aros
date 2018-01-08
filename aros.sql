@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2018 at 11:17 AM
+-- Generation Time: Jan 08, 2018 at 01:37 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -14,6 +14,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `aros`
 --
@@ -86,6 +88,23 @@ INSERT INTO `menu` (`id`, `menu`, `price`, `category`, `image`, `availability`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(3) NOT NULL,
+  `orderID` int(3) NOT NULL,
+  `waiterID` int(3) NOT NULL,
+  `menuID` int(3) NOT NULL,
+  `tableID` int(3) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `served` int(3) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tables`
 --
 
@@ -99,7 +118,9 @@ CREATE TABLE `tables` (
 --
 
 INSERT INTO `tables` (`id`, `tablenumber`) VALUES
-(1, 10);
+(1, 10),
+(2, 3),
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -144,6 +165,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tables`
 --
 ALTER TABLE `tables`
@@ -175,10 +202,15 @@ ALTER TABLE `categories`
 ALTER TABLE `menu`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `waiters`
 --

@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php 
 include "dbconn.php";
 
 if(isset($_POST['username'])){
@@ -11,6 +10,7 @@ if(isset($_POST['username'])){
 			 
 				echo $row['type'];
 				$_SESSION['ACCESS_TYPE']=$row['type'];
+				$_SESSION['ACCESS_ID']=$row['id'];
 				die();
 			 
 		}
@@ -123,8 +123,7 @@ if(isset($_POST['delMenu'])){
 	}
 }
 if(isset($_POST['setTable'])){
-	$_SESSION['table_num']=$_POST['setTable'];
-	$_SESSION['orders']=array();
+	$_SESSION['table_num']=$_POST['setTable']; 
 }
 if(isset($_POST['removeOrder'])){
 	unset($_SESSION['orders'][$_POST['removeOrder']]);
@@ -135,4 +134,11 @@ if(isset($_POST['menu_id'])){
 	}
 		array_push($_SESSION['orders'], $_POST['menu_id'].",".$_POST['quantity'].",".$_POST['table_Num']);
 	print_r($_SESSION['orders']);
+}
+if(isset($_POST['confirmOrder'])){
+	foreach($_SESSION['orders'] as $key => $val){
+		$ord=explode(",",$val);
+		$date=time();
+		$insert=$mysqli->query("insert into orders values ('NULL','','{$_SESSION['ACCESS_ID']}','{$ord[0]}','{$ord[2]}','{$ord[1]}','0','$date');") or die();
+	}	
 }
