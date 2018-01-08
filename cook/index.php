@@ -178,25 +178,25 @@ $(function() {
 	?>
 		 <div class="w3-col m3 l3"   >
          	<div class="w3-margin w3-padding-small" style="border:purple 5px double; background:black;">
-                 <h4 class="w3-text-white"  >TABLE #: <?php echo $val; ?> <span class="w3-badge w3-white w3-right">3</span></h4>
+                 <h4 class="w3-text-white"  >TABLE #: <?php echo $val; ?>  </h4>
                  <hr>
-                 	<table class="w3-table w3-white">
+                 	<table class="w3-table w3-white" style="font-size:12px;">
 <tr>
   <th>Menu</th>
   <th class="w3-right">Qty</th>
 </tr>
 </table>
-                     <ul class="w3-ul w3-text-white">
+                     <ul class="w3-ul w3-text-white" style="font-size:12px;  ">
                         <?php 
 							foreach($orderID[$key] as $p => $v){
 								$menuID=$mysqli->query("select * from orders where id='$v'");
 								while($mID=mysqli_fetch_assoc($menuID)){
 						?>
-                        <li><?php echo getMenu($mID['menuID']); ?><span class="w3-right"><?php echo $mID['quantity']; ?></span></li>
+                        <li><?php echo getMenu($mID['menuID']); ?><span class="w3-right"><?php echo $mID['quantity']; ?> <input type="checkbox" class="w3-radio" style="margin-top:-8px;" name="menuorder" value="<?php echo $mID['id']; ?>"></span></li>
                         <?php } } ?>
                      </ul>
                  <hr>
-             <button class="w3-btn w3-purple">Serve</button>    
+             <button class="w3-btn w3-purple w3-button w3-block" style="height:30px; padding-top:3px;" onClick="serveOrder();">Serve</button>    
             </div>
         </div>  
 	<?php } ?>	

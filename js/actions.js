@@ -292,3 +292,19 @@ function confirmOrder(){
 		});
 	 
 }
+function serveOrder(){  
+           var served = [];
+            $.each($("input[name='menuorder']:checked"), function(){            
+                served.push($(this).val());
+            });
+           // alert("My favourite sports are: " + favorite.join(", "));
+       $.ajax({
+			type: "POST"  ,
+			url:"../include/actions.php",
+			data: "served="+served,
+			success: function(data){
+				console.log(data);
+				location.reload();
+			}
+		});
+}

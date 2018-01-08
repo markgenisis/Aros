@@ -142,3 +142,12 @@ if(isset($_POST['confirmOrder'])){
 		$insert=$mysqli->query("insert into orders values ('NULL','','{$_SESSION['ACCESS_ID']}','{$ord[0]}','{$ord[2]}','{$ord[1]}','0','$date');") or die();
 	}	
 }
+if(isset($_POST['served'])){
+	$menus=explode(",",$_POST['served']);
+	foreach($menus as $key => $val){
+		$update=$mysqli->query("update orders set served='1' where id='$val'") or die(mysqli_error());
+	}
+	if($update){
+		echo "SUCCESS";
+	}
+}
