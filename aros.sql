@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2018 at 06:20 AM
+-- Generation Time: Jan 09, 2018 at 04:23 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -98,10 +98,22 @@ CREATE TABLE `orders` (
   `menuID` int(3) NOT NULL,
   `tableID` int(3) NOT NULL,
   `quantity` int(3) NOT NULL,
-  `served` int(3) NOT NULL,
+  `status` int(3) NOT NULL,
   `paid` int(2) NOT NULL,
   `date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `orderID`, `waiterID`, `menuID`, `tableID`, `quantity`, `status`, `paid`, `date`) VALUES
+(1, 0, 3, 3, 10, 1, 2, 0, '1515475384'),
+(2, 0, 3, 4, 10, 1, 2, 0, '1515475384'),
+(3, 0, 3, 3, 10, 1, 3, 0, '1515504830'),
+(6, 0, 3, 3, 3, 1, 1, 0, '1515510397'),
+(7, 0, 3, 4, 3, 1, 1, 0, '1515510475'),
+(8, 0, 3, 3, 3, 1, 1, 0, '1515511083');
 
 -- --------------------------------------------------------
 
@@ -206,7 +218,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tables`
 --
