@@ -244,6 +244,9 @@ function setTable(){
 			data:"setTable="+table,
 			success: function(data){
 				console.log(data)
+				$.get("../include/orders.php", function(data) {
+					$("#orderDiv").html(data); 
+				});
 			}
 		});
 }
@@ -264,7 +267,12 @@ function addOrder(id){
 				//alert(data);
 				console.log(data)
 				$("#menu_"+id).hide();
-				location.reload();
+				
+				$.get("../include/orders.php", function(data) {
+					$("#orderDiv").html(data);
+					$("#confirmOrderBtn").removeAttr("disabled","disabled");
+				});
+				
 			}
 		});
 	}
@@ -287,7 +295,12 @@ function confirmOrder(){
 			url: "../include/actions.php",
 			data:"confirmOrder=true",
 			success: function(data){
-				location.reload();
+				//location.reload();
+				console.log(data);
+				 
+				$.get("../include/orders.php", function(data) {
+					$("#orderDiv").html(data); 
+				});
 			}
 		});
 	 
@@ -307,4 +320,10 @@ function serveOrder(){
 				location.reload();
 			}
 		});
+}
+function update() {
+    $.get("../include/orders.php", function(data) {
+					$("#orderDiv").html(data);
+				});
+    
 }

@@ -139,8 +139,9 @@ if(isset($_POST['confirmOrder'])){
 	foreach($_SESSION['orders'] as $key => $val){
 		$ord=explode(",",$val);
 		$date=time();
-		$insert=$mysqli->query("insert into orders values ('NULL','','{$_SESSION['ACCESS_ID']}','{$ord[0]}','{$ord[2]}','{$ord[1]}','0','$date');") or die();
+		$insert=$mysqli->query("insert into orders values ('NULL','','{$_SESSION['ACCESS_ID']}','{$ord[0]}','{$ord[2]}','{$ord[1]}','0','0','$date');") or die();
 	}	
+	unset($_SESSION['orders']);
 }
 if(isset($_POST['served'])){
 	$menus=explode(",",$_POST['served']);
