@@ -184,7 +184,7 @@ $(window).bind('scroll', function () {
 <!--------- MEnu Container ------>
 	<div class="w3-row">
 		<!--- Side Menu List -->
-		<div class="w3-quarter w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
+		<div class="w3-col s2 w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Menu Categories</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Menu Categories</strong>
 			 <div class="w3-block">
@@ -254,7 +254,7 @@ $(window).bind('scroll', function () {
 			<a href="javascript:void(0);" style="position:absolute;z-index:9999999;top:25%;right:20px;" class="w3-btn w3-small w3-teal w3-hover-opacity" id="orderListBtn" onclick="order_list()"><i class="fa fa-list-ol"></i></a>
 		</div>
 		
-		<div class="w3-quarter w3-hide-small order_container w3-padding" id="list_of_orders">
+		<div class="w3-col s4 w3-hide-small order_container w3-padding" id="list_of_orders">
         <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if(isset($_SESSION['table_num'])){if($_SESSION['table_num'] == $tables['tablenumber']) echo "selected"; }?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong></h3>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
