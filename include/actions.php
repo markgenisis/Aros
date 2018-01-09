@@ -124,6 +124,8 @@ if(isset($_POST['delMenu'])){
 }
 if(isset($_POST['setTable'])){
 	$_SESSION['table_num']=$_POST['setTable']; 
+	 unset($_SESSION['old_data']);
+	echo $_SESSION['table_num'];
 }
 if(isset($_POST['removeOrder'])){
 	unset($_SESSION['orders'][$_POST['removeOrder']]);

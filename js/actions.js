@@ -247,6 +247,7 @@ function setTable(){
 				$.get("../include/orders.php", function(data) {
 					$("#orderDiv").html(data); 
 				});
+				checkOrders();
 			}
 		});
 }
@@ -297,10 +298,10 @@ function confirmOrder(){
 			success: function(data){
 				//location.reload();
 				console.log(data);
-				 
 				$.get("../include/orders.php", function(data) {
 					$("#orderDiv").html(data); 
 				});
+				checkOrders();
 			}
 		});
 	 
@@ -325,6 +326,20 @@ function update() {
     $.get("../include/orders.php", function(data) {
 					$("#orderDiv").html(data);
 				});
+    
+}
+function checkOrders() {
+    $.get("../include/checkOrder.php", function(data) {
+					//$("#orderDiv").html(data);
+					console.log(data);
+					if(data>=1){
+						alert("Some Menu are ready to serve!");
+						$.get("../include/orders.php", function(data) {
+							$("#orderDiv").html(data);
+						});
+					}
+				});
+	window.setTimeout("checkOrders();", 15000);
     
 }
 function verifyOrder(x){
