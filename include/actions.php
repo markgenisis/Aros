@@ -146,9 +146,26 @@ if(isset($_POST['confirmOrder'])){
 if(isset($_POST['served'])){
 	$menus=explode(",",$_POST['served']);
 	foreach($menus as $key => $val){
-		$update=$mysqli->query("update orders set served='1' where id='$val'") or die(mysqli_error());
+		$update=$mysqli->query("update orders set status='1' where id='$val'") or die(mysqli_error());
 	}
 	if($update){
 		echo "SUCCESS";
 	}
+}
+if(isset($_POST['removeDBOrder'])){
+	$id=$_POST['removeDBOrder'];
+	$del=$mysqli->query("delete from orders where id='$id'") or die();
+}
+if(isset($_POST['ids'])){
+	//echo $_POST['ids']." - ".$_POST['verify'];
+	$ids=explode(",",$_POST['ids']);
+	$checked=explode(",",$_POST['verify']);
+	foreach($ids as $key => $men){
+		if(in_array($men,$checked)){
+			$update=$mysqli->query("update orders set status='2' where id='$men'") or die();
+		}else{
+			$update=$mysqli->query("update orders set status='3' where id='$men'") or die();
+		}
+	}
+	
 }

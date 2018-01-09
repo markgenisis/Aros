@@ -327,3 +327,33 @@ function update() {
 				});
     
 }
+function verifyOrder(x){
+	var ids=$("#"+x+"_ids").val();
+	var served = [];
+            $.each($("input[name='"+x+"_statusOrder']:checked"), function(){            
+                served.push($(this).val());
+            });
+	 $.ajax({
+			type: "POST"  ,
+			url:"../include/actions.php",
+			data: "verify="+served+"&ids="+ids,
+			success: function(data){
+				console.log(data);
+				location.reload();
+				
+			}
+		});
+}
+function removeDBOrder(id){
+	 $.ajax({
+			type: "POST"  ,
+			url:"../include/actions.php",
+			data: "removeDBOrder="+id,
+			success: function(data){
+				console.log(data);
+				$.get("../include/orders.php", function(data) {
+					$("#orderDiv").html(data); 
+				});
+			}
+		});
+}

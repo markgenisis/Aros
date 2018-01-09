@@ -37,3 +37,20 @@ function getPrice($x){
 	return $row['price'];
 	}
 }
+function getStatus($x){
+	global $mysqli;
+	switch($x){
+		case 1:
+			return "served.png";
+			break;
+		case 0:
+			return "waiting.png";
+			break;
+		case 2:
+			return "cooking.png";
+			break;
+		case 3:
+			return "notavail.png";
+			break;
+	}
+}
