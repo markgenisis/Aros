@@ -34,4 +34,4 @@
 			  ?>
 			</ul>
              <hr>
-            <div class="w3-left"><button class="w3-btn w3-purple" onClick="confirmOrder();" id="confirmOrderBtn" disabled>Confirm Orders</button>&nbsp;<?php if($num == $servedNum){?><button class="w3-btn w3-green">Bill Out</button><?php } ?></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
+            <div class="w3-left"><button class="w3-btn w3-purple" onClick="confirmOrder();" id="confirmOrderBtn" disabled>Confirm Orders</button>&nbsp;<?php if($servedNum){if($num == $servedNum){?><button class="w3-btn w3-green">Bill Out</button><?php } }?></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>

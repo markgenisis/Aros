@@ -1,6 +1,6 @@
 <?php
  include "../include/dbconn.php";
- if($_SESSION['ACCESS_TYPE']!='4'){
+ if($_SESSION['ACCESS_TYPE']!='2'){
 	header("location:../");
 	die();
 	}
@@ -184,82 +184,61 @@ $(window).bind('scroll', function () {
 <!--------- MEnu Container ------>
 	<div class="w3-row">
 		<!--- Side Menu List -->
-		<div class="w3-col s2 w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
-			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Menu Categories</strong></h3>
+		<div class="w3-col s4 w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
+			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">ORDER LISTS</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Menu Categories</strong>
 			 <div class="w3-block">
-				<?php $categories=$mysqli->query("select * from categories");
-						  while($cat=mysqli_fetch_assoc($categories)){
+				<?php
+	$tables=array(); $orderID=array(); $x=0;$i=0;
+		$orders=$mysqli->query("select * from orders where paid = '0' and status ='1' order by date asc");
+		while($row=mysqli_fetch_assoc($orders)){ 
+				if(!in_array($row['tableID'],$tables)){
+					array_push($tables,$row['tableID']);	 
+					$i++;
+				}$orderID[$i-1][$x]=$row['id'];
+				$x++;
+		}
+					foreach($tables as $key => $val){
 						?>
-						<a href="?cat=<?php echo $cat['id'];?>" class="w3-bar-item w3-button w3-small"><?php echo $cat['category'];?></a>
+						<a href="?order=<?php echo $val;?>" class="w3-bar-item w3-button w3-small">Table #: <span class="w3-badge"><?php echo $val;?></span></a>
 						<?php } ?>
 			</div>
 		</div>
 		<!--- Side Menu List -->
 		
-		<!--- PUTAHE Container -->
-		<div class="w3-half putahe_container w3-padding" id="center_putahe">
-			<div class="w3-row-padding">
-			<?php if(isset($_GET['cat'])){
-			 $menu=$mysqli->query("select * from menu where category='{$_GET['cat']}'");
-			 while($list=mysqli_fetch_assoc($menu)){
-			    ?>
-				<div class="w3-third" >
-					<div class="w3-row">
-						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
-							<div class="">
-								<p style="font-size:1.2em;text-align:"><i><strong><?php echo $list['menu']; ?></strong></i></p>
-							</div>
-							<div style="height:100%; width:100%">
-							  <img src="../images/<?php echo $list['image']; ?>" width="100%" height="150"/>
-								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; <?php echo number_format($list['price'],2); ?></div>
-							</div>
-							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block add_odrder_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
-                                
-                                <!-- The Modal -->
-                                    <div id="menu_<?php echo $list['id']; ?>" class="w3-modal" >
-                                      <div class="w3-modal-content w3-animate-top" style="max-width:400px;">
-                                      	<div class="w3-container w3-purple">
-                                         <span onclick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='none'" 
-                                          class="w3-button w3-display-topright">&times;</span>
-                                          <h3><?php echo $list['menu']; ?> Quantity</h3>
-                                        </div>
-                                        <div class="w3-container w3-padding">
-                                        <input type="hidden" id="menu_id_<?php echo $list['id']; ?>" value="<?php echo $list['id']; ?>" >
-                                         <label>Select Quantity:</label>
-                                          <select class="w3-input" id="quantity_<?php echo $list['id']; ?>">
-                                          	<?php
-												for($x=1; $x<=10; $x++){
-											?>
-                                            <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
-                                            <?php } ?>
-                                          </select>
-                                          <button class="w3-green w3-btn w3-margin-top" onClick="addOrder(<?php echo $list['id']; ?>);">Add to Orders</button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    
-							</div>
-						</div>
-					</div>
-				</div>
-			<?php } }?>	
-			</div>
-		</div>
-		<!--- PUTAHE Container -->
+		 
 		
 		<!--- PUTAHE Container -->
 		<div class="w3-hide-large w3-right" >
 			<a href="javascript:void(0);" style="position:absolute;z-index:9999999;top:25%;right:20px;" class="w3-btn w3-small w3-teal w3-hover-opacity" id="orderListBtn" onclick="order_list()"><i class="fa fa-list-ol"></i></a>
 		</div>
 		
-		<div class="w3-col s4 w3-hide-small order_container w3-padding" id="list_of_orders">
-        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if(isset($_SESSION['table_num'])){if($_SESSION['table_num'] == $tables['tablenumber']) echo "selected"; }?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong></h3>
+		<div class="w3-col w3-right s4 w3-hide-small order_container w3-padding" id="list_of_orders">
+        <?php
+			if(isset($_GET['order'])){
+				$total=0;
+		?>
+        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp; <?php echo $_GET['order']; ?></strong></h3>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
-			<div id="orderDiv"></div>
-           
+			 <table class="w3-table w3-white" style="font-size:12px;">
+<tr>
+  <th width="5%">Qty</th>
+  <th  width="60%">Menu</th>
+  <th class=" ">Price</th>
+  <th class="w3-right">Status</th>
+</tr>
+</table>
+            <ul class="w3-ul w3-hoverable">
+            <?php $sql=$mysqli->query("select * from orders where tableID='{$_GET['order']}' and paid='0' and status='1'");
+			while($row=mysqli_fetch_assoc($sql)){
+			 ?>
+            <li> <span class="w3-badge"><?php echo $row['quantity']; ?> </span> <?php getMenu($row['menuID']); ?> <span class='w3-right'><?php echo number_format((getPrice($row['menuID'])*$row['quantity']),2); ?> <span ><img src="../images/<?php echo getStatus($row['status']); ?>" width="25"></span></span></li>
+            <?php $total+= (getPrice($row['menuID'])*$row['quantity']);} ?>
+            </ul>
+         <?php } ?>  
+         <hr>
+            <div class="w3-left"><a class="w3-btn w3-purple" target="_new" href="billout.php?billout=<?php echo $_GET['order']; ?>"  >Bill Out</a>&nbsp; <a class="w3-btn w3-green" target="_new" href="billout.php?billout=<?php echo $_GET['order']; ?>"  >Mark as Paid</a></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
 		</div>
 		<!--- PUTAHE Container -->
 		
@@ -271,4 +250,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html> 
+</html>>>>
