@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2018 at 04:23 PM
+-- Generation Time: Jan 17, 2018 at 06:49 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -88,12 +88,36 @@ INSERT INTO `menu` (`id`, `menu`, `price`, `category`, `image`, `availability`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderid`
+--
+
+CREATE TABLE `orderid` (
+  `id` int(3) NOT NULL,
+  `orderID` varchar(25) NOT NULL,
+  `waiter` int(3) NOT NULL,
+  `tableNum` int(3) NOT NULL,
+  `date` varchar(25) NOT NULL,
+  `status` int(2) NOT NULL,
+  `total` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderid`
+--
+
+INSERT INTO `orderid` (`id`, `orderID`, `waiter`, `tableNum`, `date`, `status`, `total`) VALUES
+(1, '10-01-17@10:48', 3, 10, '1516157292', 1, '200'),
+(2, '5-01-17@10:49', 3, 5, '1516157372', 1, '100');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `id` int(3) NOT NULL,
-  `orderID` int(3) NOT NULL,
+  `orderID` varchar(20) NOT NULL,
   `waiterID` int(3) NOT NULL,
   `menuID` int(3) NOT NULL,
   `tableID` int(3) NOT NULL,
@@ -108,12 +132,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `orderID`, `waiterID`, `menuID`, `tableID`, `quantity`, `status`, `paid`, `date`) VALUES
-(1, 0, 3, 3, 10, 1, 2, 0, '1515475384'),
-(2, 0, 3, 4, 10, 1, 2, 0, '1515475384'),
-(3, 0, 3, 3, 10, 1, 3, 0, '1515504830'),
-(6, 0, 3, 3, 3, 1, 1, 0, '1515510397'),
-(7, 0, 3, 4, 3, 1, 1, 0, '1515510475'),
-(8, 0, 3, 3, 3, 1, 1, 0, '1515511083');
+(1, '10-01-17@10:48', 3, 3, 10, 1, 1, 1, '1516157292'),
+(2, '5-01-17@10:49', 3, 3, 5, 1, 1, 1, '1516157372'),
+(3, '10-01-17@10:48', 3, 3, 10, 1, 1, 1, '1516158332');
 
 -- --------------------------------------------------------
 
@@ -178,6 +199,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orderid`
+--
+ALTER TABLE `orderid`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -215,10 +242,15 @@ ALTER TABLE `categories`
 ALTER TABLE `menu`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `orderid`
+--
+ALTER TABLE `orderid`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tables`
 --
