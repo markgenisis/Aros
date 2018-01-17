@@ -255,7 +255,7 @@ $(window).bind('scroll', function () {
 		</div>
 		
 		<div class="w3-col s4 w3-hide-small order_container w3-padding" id="list_of_orders">
-        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if(isset($_SESSION['table_num'])){if($_SESSION['table_num'] == $tables['tablenumber']) echo "selected"; }?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong><span class="w3-right" id="orderID"><?php echo $_SESSION['ORDER_ID']; ?></span></h3>
+        <h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Table #: &nbsp;&nbsp;<select id="table_number" onChange="setTable()"><option></option><?php $table=$mysqli->query("select * from tables"); while($tables=mysqli_fetch_assoc($table)){ ?><option <?php if(isset($_SESSION['table_num'])){if($_SESSION['table_num'] == $tables['tablenumber']) echo "selected"; }?>><?php echo $tables['tablenumber']; ?></option><?php } ?></select></strong><span class="w3-right" id="orderID"><?php if(isset($_SESSION['ORDER_ID']))echo $_SESSION['ORDER_ID']; ?></span></h3>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">Orders:</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">Orders</strong><a href="javascript:void(0);" class="w3-hide-large w3-right" onclick="order_list_rev()" style="text-decoration:none;">X</a>
 			<div id="orderDiv"></div>
