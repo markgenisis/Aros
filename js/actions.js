@@ -244,9 +244,13 @@ function setTable(){
 			data:"setTable="+table,
 			success: function(data){
 				console.log(data)
+				 $.get("../include/orderID.php", function(data) { 
+					$("#orderID").html(data); 
+				}); 
 				$.get("../include/orders.php", function(data) {
 					$("#orderDiv").html(data); 
 				});
+				
 				checkOrders();
 			}
 		});
@@ -300,6 +304,9 @@ function confirmOrder(){
 				console.log(data);
 				$.get("../include/orders.php", function(data) {
 					$("#orderDiv").html(data); 
+				});
+				$.get("../include/orderID.php", function(data) { 
+					$("#orderID").html(data); 
 				});
 				checkOrders();
 			}
@@ -371,4 +378,49 @@ function removeDBOrder(id){
 				});
 			}
 		});
+}
+function orderPayment(){
+	var orderID=$("#orderID").val();
+	var amountPayment=$("#amountPayment").val();
+	var total=$("#total").val();
+	if(total > amountPayment){
+		alert("Amount of Payment is insuficient.");
+		return false;
+	}else{
+		$.ajax({
+			type: "POST",
+			url: "../include/actions.php",
+			data: "ordID="+orderID+"&payment="+amountPayment,
+			success: function(data){
+					if(data=="SUCCESS"){
+					location="./";
+					}
+			}
+		});
+	}
+}
+function reportSearch(){
+	var month=$("#month").val();
+	var year = $("#year").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "../include/actions.php",
+		data: "month="+month+"&year="+year,
+		success: function(data){
+			console.log(data);
+			$("#reportsresult").html(data);
+		}
+	});
+}
+function dailyReports(x){
+	$.ajax({
+		type: "POST",
+		url: "../include/actions.php",
+		data: "daily="+x,
+		success: function(data){
+			console.log(data);
+			 $("#dailyReport").html(data);
+		}
+	});
 }
