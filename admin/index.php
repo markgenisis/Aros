@@ -250,13 +250,13 @@ $(function() {
 									<option value="<?php echo $row['id']; ?>"><?php echo $row['category']; ?></option>
 								<?php } ?>
 							</select>
-							<label>Menu Name:</label>
+							<label>Name:</label>
 							<input type="text" class="w3-input" id="menuname" required />
 							<label>Price:</label>
 							<input type="text" class="w3-input" id="menuprice" required />
 							<label>Image:</label>
 							<input type="file" class="w3-input" id="menuimage" required />
-							<input type="submit" class="w3-btn w3-green w3-margin-top" value="ADD MENU">
+							<input type="submit" class="w3-btn w3-green w3-margin-top" value="SAVE">
 						</form>
 						</div>
 						<div class="w3-container" id="preview_container">
@@ -333,13 +333,13 @@ $(function() {
                                                     <option <?php if($row['category']==$rows['id']) echo "selected"; ?> value="<?php echo $rows['id']; ?>"><?php echo $rows['category']; ?></option>
                                                 <?php } ?>
                                             </select>
-                                            <label>Menu Name:</label>
+                                            <label>Name:</label>
                                             <input type="text" class="w3-input" id="menuname<?php echo $row['id']; ?>" value="<?php echo $row['menu']; ?>" required />
                                             <label>Price:</label>
                                             <input type="text" class="w3-input" id="menuprice<?php echo $row['id']; ?>" value="<?php echo $row['price']; ?>" required />
                                             <label>Image:</label>
                                             <input type="file" class="w3-input" id="menuimage<?php echo $row['id']; ?>" />
-                                            <input type="submit" class="w3-btn w3-green w3-margin-top" value="ADD MENU">
+                                            <input type="submit" class="w3-btn w3-green w3-margin-top" value="UPDATE MENU">
                                         </form>
                                         </div>
                                         <div class="w3-container" id="preview_container">
@@ -424,4 +424,4 @@ $(function() {
 <!--------- MEnu Container ------>
 <script type="application/javascript" src="../js/actions.js"></script>
 </body>
-</html> >>>
+</html> >>>>>>

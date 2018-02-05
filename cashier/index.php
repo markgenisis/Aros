@@ -241,7 +241,7 @@ $(window).bind('scroll', function () {
             <select class="w3-input" id="year">
             	<option ></option>
                 <?php
-				 for($x=2017; $x<=2025; $x++){
+				 for($x=2018; $x<=2035; $x++){
 				?>
                 <option ><?php echo $x; ?></option>
                 <?php } ?>
@@ -287,7 +287,7 @@ $(window).bind('scroll', function () {
             <li> <span class="w3-badge"><?php echo $row['quantity']; ?> </span> <?php getMenu($row['menuID']); ?> <span class='w3-right'><?php echo number_format((getPrice($row['menuID'])*$row['quantity']),2); ?> <span ><img src="../images/<?php echo getStatus($row['status']); ?>" width="25"></span></span></li>
             <?php $total+= (getPrice($row['menuID'])*$row['quantity']);} ?>
             </ul>
-         <?php }if(isset($total)){ ?>  
+         <?php }if(isset($total) && $total>0){ ?>  
          <hr>
             <div class="w3-left"><a class="w3-btn w3-purple" target="_new" href="billout.php?billout=<?php echo $_GET['order']; ?>"  >Bill Out</a>&nbsp; <a class="w3-btn w3-green"    onclick="document.getElementById('paidpanel').style.display='block'" >Mark as Paid</a></div><div class="w3-right w3-text-blue-gray">Total: Php <?php  echo number_format($total,2); ?></div>
            <!-- The Modal -->

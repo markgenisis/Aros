@@ -54,3 +54,10 @@ function getStatus($x){
 			break;
 	}
 }
+function getWaiterName($x){
+	global $mysqli;
+	$cat=$mysqli->query("select * from waiters where accountID='$x'");	
+	while($row=mysqli_fetch_assoc($cat)){
+	return $row['name'];
+	}
+}

@@ -271,4 +271,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html> >>>>>
+</html>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2018 at 06:49 AM
+-- Generation Time: Jan 24, 2018 at 06:14 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -107,7 +107,9 @@ CREATE TABLE `orderid` (
 
 INSERT INTO `orderid` (`id`, `orderID`, `waiter`, `tableNum`, `date`, `status`, `total`) VALUES
 (1, '10-01-17@10:48', 3, 10, '1516157292', 1, '200'),
-(2, '5-01-17@10:49', 3, 5, '1516157372', 1, '100');
+(2, '5-01-17@10:49', 3, 5, '1516157372', 1, '100'),
+(3, '10-01-17@13:51', 3, 10, '1516168314', 1, '4600'),
+(4, '3-01-17@13:53', 3, 3, '1516168425', 1, '3100');
 
 -- --------------------------------------------------------
 
@@ -134,7 +136,11 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `orderID`, `waiterID`, `menuID`, `tableID`, `quantity`, `status`, `paid`, `date`) VALUES
 (1, '10-01-17@10:48', 3, 3, 10, 1, 1, 1, '1516157292'),
 (2, '5-01-17@10:49', 3, 3, 5, 1, 1, 1, '1516157372'),
-(3, '10-01-17@10:48', 3, 3, 10, 1, 1, 1, '1516158332');
+(3, '10-01-17@10:48', 3, 3, 10, 1, 1, 1, '1516158332'),
+(4, '10-01-17@13:51', 3, 4, 10, 3, 1, 1, '1516168314'),
+(5, '10-01-17@13:51', 3, 3, 10, 1, 1, 1, '1516168314'),
+(6, '3-01-17@13:53', 3, 3, 3, 1, 1, 1, '1516168425'),
+(7, '3-01-17@13:53', 3, 4, 3, 2, 1, 1, '1516168425');
 
 -- --------------------------------------------------------
 
@@ -245,12 +251,12 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `orderid`
 --
 ALTER TABLE `orderid`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tables`
 --

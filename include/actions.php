@@ -236,7 +236,7 @@ if(isset($_POST['daily'])){
 		if(date("M d, Y",$_POST['daily'])==date("M d, Y",$row['date'])){
 		?>
         <tr>
-        	<td><?php echo $row['waiter'] ?></td>
+        	<td><?php echo getWaiterName($row['waiter']); ?></td>
             <td class="w3-center"><?php echo $row['tableNum'] ?></td>
             <td class="w3-right"><?php echo number_format($row['total'],2); ?></td>
         </tr>
