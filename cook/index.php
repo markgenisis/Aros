@@ -76,7 +76,8 @@ $(document).ready(function () {
   $("#menuimage").change(function(){
 			readURL(this);
 		});
-	setInterval(getOrders,3000);
+	getOrders();
+	setInterval(getOrders,10000);
 });
 function order_list(){
 		$('#list_of_orders').removeClass('w3-animate-right w3-hide-small ');
@@ -128,12 +129,18 @@ $(function() {
     }
 	
 	function getOrders(){
+		var dddata = $('#dddata').val();
+				console.log(dddata);
 		$.ajax({
 			url:'orders.php',
 			type:'GET',
 			success:function(data){
-				console.log(data);
-				$("#ordersAppending").html(data);
+				if(data == dddata){
+					alert("asdasdad");
+				}else{
+					$('#dddata').prop("value",data);
+					$("#ordersAppending").html(data);
+				}
 			}
 		})
 	}
@@ -173,6 +180,7 @@ $(function() {
 <!--------- MEnu Container ------>
 <div class="w3-container">
 	<div class="w3-row">
+		<input type="hidden" value="" id="dddata"/>
 		<div id="ordersAppending"></div>
 	</div>
 </div>

@@ -44,7 +44,6 @@ require("../include/functions.php");
         </div>  
 	<?php } ?>	
     
-    <!-- VERIFY -->
     <?php
 	$tables=array(); $orderID=array(); $x=0;$i=0;
 		$orders=$mysqli->query("select * from orders where status = '0' and status !='1' order by date asc");
@@ -88,4 +87,3 @@ require("../include/functions.php");
             </div>
         </div>  
 	<?php } ?>	
-    <!-- VERIFY -->
