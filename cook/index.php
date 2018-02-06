@@ -76,8 +76,8 @@ $(document).ready(function () {
   $("#menuimage").change(function(){
 			readURL(this);
 		});
-	getOrders();
-	setInterval(getOrders,10000);
+	loadgetOrders();
+	setInterval(getOrders,5000);
 });
 function order_list(){
 		$('#list_of_orders').removeClass('w3-animate-right w3-hide-small ');
@@ -129,6 +129,24 @@ $(function() {
     }
 	
 	function getOrders(){
+		var dddata = $('#dddata').val();
+		var orderCounter = $("#orderCounter").val();
+		//alert(orderCounter);
+			//console.log(orderCounter);
+		$.ajax({
+			url:'orders.php',
+			type:'GET',
+			success:function(data){
+				if(orderCounter == dddata){
+					alert("asdasdad");
+				}else{
+					$('#dddata').prop("value",data);
+					$("#ordersAppending").html(data);
+				}
+			}
+		})
+	}
+	function loadgetOrders(){
 		var dddata = $('#dddata').val();
 				console.log(dddata);
 		$.ajax({

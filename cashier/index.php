@@ -148,7 +148,7 @@ $(window).bind('scroll', function () {
     }
 });
 </script>
-<body onLoad="update();" >
+<body onLoad="update();" class="w3-black" style="color:yellow !important;">
 <!---------TOP NAV ------>
 	<div class="w3-row">
 		<div class="banner w3-container">

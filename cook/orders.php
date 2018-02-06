@@ -17,6 +17,7 @@ require("../include/functions.php");
 				$x++;
 		}
 		//print_r($orderID);
+		$orderCounter2stat = 1;
 	foreach($tables as $key => $val){
 	?>
 		 <div class="w3-col m3 l3"   >
@@ -31,9 +32,11 @@ require("../include/functions.php");
 </table>
                      <ul class="w3-ul w3-text-white" style="font-size:12px;  ">
                         <?php 
+						
 							foreach($orderID[$key] as $p => $v){
 								$menuID=$mysqli->query("select * from orders where id='$v'");
 								while($mID=mysqli_fetch_assoc($menuID)){
+									$orderCounter2stat= $orderCounter2stat + 1;
 						?>
                         <li><?php echo getMenu($mID['menuID']); ?><span class="w3-right"><?php echo $mID['quantity']; ?> <input type="checkbox" class="w3-radio" style="margin-top:-8px;" name="menuorder" value="<?php echo $mID['id']; ?>"></span></li>
                         <?php } } ?>
@@ -41,7 +44,9 @@ require("../include/functions.php");
                  <hr>
              <button class="w3-btn w3-purple w3-button w3-block" style="height:30px; padding-top:3px;" onClick="serveOrder();">Serve</button>    
             </div>
+			
         </div>  
+		<input type="hidden" id="orderCounter" value="<?php echo $orderCounter2stat?>">
 	<?php } ?>	
     
     <?php
@@ -77,6 +82,7 @@ require("../include/functions.php");
 							foreach($orderID[$key] as $p => $v){
 								$menuID=$mysqli->query("select * from orders where id='$v'");
 								while($mID=mysqli_fetch_assoc($menuID)){
+									//$orderCounter1stat = $orderCounter1stat + 1;
 						?>
                         <li><?php echo getMenu($mID['menuID']); ?><span class="w3-right"><?php //echo $mID['quantity']; ?> <input type="checkbox" class="w3-radio" style="margin-top:-8px;" name="<?php echo $val; ?>_statusOrder" value="<?php echo $mID['id']; ?>"></span></li>
                         <?php } } ?>
