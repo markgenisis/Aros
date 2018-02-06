@@ -228,13 +228,8 @@ $(window).bind('scroll', function () {
                                         <div class="w3-container w3-padding">
                                         <input type="hidden" id="menu_id_<?php echo $list['id']; ?>" value="<?php echo $list['id']; ?>" >
                                          <label>Select Quantity:</label>
-                                          <select class="w3-input" id="quantity_<?php echo $list['id']; ?>">
-                                          	<?php
-												for($x=1; $x<=10; $x++){
-											?>
-                                            <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
-                                            <?php } ?>
-                                          </select>
+                                          <input type="number" class="w3-input" id="quantity_<?php echo $list['id']; ?>">
+                                          	 
                                           <button class="w3-green w3-btn w3-margin-top" onClick="addOrder(<?php echo $list['id']; ?>);">Add to Orders</button>
                                         </div>
                                       </div>
@@ -271,4 +266,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html>
+</html>>>>>>

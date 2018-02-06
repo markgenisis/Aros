@@ -253,7 +253,7 @@ $(function() {
 							<label>Name:</label>
 							<input type="text" class="w3-input" id="menuname" required />
 							<label>Price:</label>
-							<input type="text" class="w3-input" id="menuprice" required />
+							<input type="number" class="w3-input" id="menuprice" required />
 							<label>Image:</label>
 							<input type="file" class="w3-input" id="menuimage" required />
 							<input type="submit" class="w3-btn w3-green w3-margin-top" value="SAVE">
@@ -336,7 +336,7 @@ $(function() {
                                             <label>Name:</label>
                                             <input type="text" class="w3-input" id="menuname<?php echo $row['id']; ?>" value="<?php echo $row['menu']; ?>" required />
                                             <label>Price:</label>
-                                            <input type="text" class="w3-input" id="menuprice<?php echo $row['id']; ?>" value="<?php echo $row['price']; ?>" required />
+                                            <input type="number" class="w3-input" id="menuprice<?php echo $row['id']; ?>" value="<?php echo $row['price']; ?>" required />
                                             <label>Image:</label>
                                             <input type="file" class="w3-input" id="menuimage<?php echo $row['id']; ?>" />
                                             <input type="submit" class="w3-btn w3-green w3-margin-top" value="UPDATE MENU">
@@ -365,7 +365,7 @@ $(function() {
                     	<div id="alertMSG"></div>
                     	
                         <label>Table Number:</label>
-                        <input type="text" class="w3-input" id="tablenumber" >
+                        <input type="number" class="w3-input" id="tablenumber" >
                         <input type="button" class="w3-btn w3-green w3-margin-top" value="ADD TABLE" onClick="addTable()"  >
                     </div>
                     
@@ -424,4 +424,4 @@ $(function() {
 <!--------- MEnu Container ------>
 <script type="application/javascript" src="../js/actions.js"></script>
 </body>
-</html> >>>>>>
+</html> >>>>>>>>>

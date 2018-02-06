@@ -301,8 +301,9 @@ $(window).bind('scroll', function () {
                     </header>
                    
                   <div class="w3-container">
+                  <div id="message"></div>
                  	<label>Amount Paid:</label>
-                    <input type="text" class="w3-input" id="amountPayment" >
+                    <input type="number" class="w3-input" id="amountPayment" >
                     <input type="hidden" id="total" value="<?php echo $total; ?>" >
                     <input type="hidden" value="<?php echo $_GET['order']; ?>" id="orderID" >
                  <input type="button" class="w3-btn w3-green w3-margin-top" value="Confirm Payment" onClick="orderPayment();">
@@ -324,4 +325,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html>
+</html>>>>

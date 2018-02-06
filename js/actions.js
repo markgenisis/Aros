@@ -386,6 +386,23 @@ function orderPayment(){
 	if(total > amountPayment){
 		alert("Amount of Payment is insuficient.");
 		return false;
+	}else if(amountPayment > total){
+		$("#message").show().html("<div class='w3-panel w3-green w3-padding'>Change: Php "+ (amountPayment-total) +"</div>");
+		console.log(amountPayment-total);
+		setTimeout(function(){$("#message").hide();},2000);
+		setTimeout(function(){
+			var tot=amountPayment-total;
+			$.ajax({
+				type: "POST",
+				url: "../include/actions.php",
+				data: "ordID="+orderID+"&payment="+total,
+				success: function(data){
+						if(data=="SUCCESS"){
+						location="./";
+						}
+				}
+			});
+		},5000);
 	}else{
 		$.ajax({
 			type: "POST",
