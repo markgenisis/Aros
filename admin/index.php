@@ -254,8 +254,8 @@ $(function() {
 							<input type="text" class="w3-input" id="menuname" required />
 							<label>Price:</label>
 							<input type="number" class="w3-input" id="menuprice" required />
-							<label>Image:</label>
-							<input type="file" class="w3-input" id="menuimage" required />
+							<!--<label>Image:</label>
+							<input type="file" class="w3-input" id="menuimage" required />-->
 							<input type="submit" class="w3-btn w3-green w3-margin-top" value="SAVE">
 						</form>
 						</div>
@@ -295,19 +295,25 @@ $(function() {
                     </div>
                     <div class="w3-container w3-card-4 w3-padding">
                     	<div id="alertMSG"></div>
-						
+						<table class="w3-table">
+							<thead>
+								<tr class="w3-purple">
+									<th>Menu</th>
+									<th>Price</th>
+									<th>Action</th>
+								</tr>
+							</thead>
                         <?php
 							$cat=$mysqli->query("select * from menu where category='{$_GET['cat']}'");
 							while($row=mysqli_fetch_assoc($cat)){
 						?>
-                        <div class="w3-quarter w3-padding" style="height:260px;" id="menu_<?php echo $row['id']; ?>">
-                        	<div style="cursor:pointer; border: solid 1px #000; border-radius: 15px; "  >
-                        		<img src="../images/<?php echo $row['image']; ?>" style="width:100%; height:180px;" >
-                               <center><label class="w3-block w3-purple">Php <?php echo number_format($row['price'],2); ?></label></center>
-                            	<center><label><?php echo strtoupper($row['menu']); ?></label></center>
-                                <span class="w3-badge w3-green fa fa-pencil" style="border-radius:25px; height:20px; padding-top:2px; position:relative; top:-235px; right:-118px;" onclick="document.getElementById('editmenu_<?php echo $row['id']; ?>').style.display='block'"></span><span class="w3-badge fa fa-trash w3-red" style="border-radius:25px; height:20px; padding-top:2px; position:relative; top:-235px; right:-120px;" onClick="deleteMenu(<?php echo $row['id']; ?>);"></span>
-                            </div>
-                        </div>
+						<tr>
+							<td><?php echo strtoupper($row['menu']); ?></td>
+							<td><?php echo number_format($row['price'],2); ?></td>
+							<td>
+								 <span class="w3-badge w3-green fa fa-pencil" style="border-radius:25px; height:20px;" onclick="document.getElementById('editmenu_<?php echo $row['id']; ?>').style.display='block'"></span> | <span class="w3-badge fa fa-trash w3-red" style="border-radius:25px; height:20px;" onClick="deleteMenu(<?php echo $row['id']; ?>);"></span>
+							</td>
+						</tr>
                         
                         <!-- Trigger/Open the Modal --> 
                             
@@ -337,8 +343,8 @@ $(function() {
                                             <input type="text" class="w3-input" id="menuname<?php echo $row['id']; ?>" value="<?php echo $row['menu']; ?>" required />
                                             <label>Price:</label>
                                             <input type="number" class="w3-input" id="menuprice<?php echo $row['id']; ?>" value="<?php echo $row['price']; ?>" required />
-                                            <label>Image:</label>
-                                            <input type="file" class="w3-input" id="menuimage<?php echo $row['id']; ?>" />
+                                            <!--<label>Image:</label>
+                                            <input type="file" class="w3-input" id="menuimage<?php echo $row['id']; ?>" />-->
                                             <input type="submit" class="w3-btn w3-green w3-margin-top" value="UPDATE MENU">
                                         </form>
                                         </div>
@@ -350,6 +356,7 @@ $(function() {
                             </div>
                         
                         <?php } ?>
+					</table>
                     </div>
                 </div>
             <?php } ?>		 

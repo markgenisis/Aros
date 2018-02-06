@@ -140,11 +140,9 @@ function addWaiter(){
 //adding menu
 function add_menu(){
 	var fd = new FormData();
-	var file_data = $('#menuimage').get(0).files[0];
 	var cat_id = $('#catID').val();
 	var menu_name = $('#menuname').val();
 	var menu_price = $('#menuprice').val();
-	fd.append('new_menu_img',file_data);
 	fd.append('menu_cat_id',cat_id);
 	fd.append('new_menu_name',menu_name);
 	fd.append('menu_price',menu_price);
@@ -196,11 +194,11 @@ function deleteMenu(x){
 }
 function edit_menu(x){
 	var fd = new FormData();
-	var file_data = $('#menuimage'+x).get(0).files[0];
+	//var file_data = $('#menuimage'+x).get(0).files[0];
 	var cat_id = $('#catID'+x).val();
 	var menu_name = $('#menuname'+x).val();
 	var menu_price = $('#menuprice'+x).val();
-	fd.append('editnew_menu_img',file_data);
+	//fd.append('editnew_menu_img',file_data);
 	fd.append('editmenu_cat_id',cat_id);
 	fd.append('editnew_menu_name',menu_name);
 	fd.append('editmenu_price',menu_price);

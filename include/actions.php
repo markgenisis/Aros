@@ -59,23 +59,18 @@ if(isset($_POST['new_menu_name'])){
 	$menu_cat_id = $_POST['menu_cat_id'];
 	$menu_name = $_POST['new_menu_name'];
 	$menu_price = $_POST['menu_price'];
-	$menu_img_name = $_FILES['new_menu_img']['name'];
-	$tmp_src = $_FILES['new_menu_img']['tmp_name'];
-	$destination = "../images/";
 	
 	$check = mysqli_num_rows($mysqli->query("select * from menu where menu='$menu_name' and category='$menu_cat_id'"));
 	if($check > 0){
 		echo "DUPLICATE";
 	}else{
-		if(move_uploaded_file($tmp_src,$destination.$menu_img_name)){
-			$insert=$mysqli->query("insert into menu values ('NULL','$menu_name','$menu_price','$menu_cat_id','$menu_img_name','1')");
-			if($insert){
-				echo "SUCCESS";
-			}else{
-				mysqli_error();
-			}
+		//if(move_uploaded_file($tmp_src,$destination.$menu_img_name)){
+		$insert=$mysqli->query("insert into menu values ('NULL','$menu_name','$menu_price','$menu_cat_id','','1')");
+		if($insert){
+			echo "SUCCESS";
 		}else{
-			mysqli_error();
+			echo "error!";
+			//mysqli_error();
 		}
 	}
 	
