@@ -14,6 +14,100 @@
 <link rel="stylesheet" href="../css/w3.css">
 <link rel="stylesheet" type="text/css" href="../google/fafa.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function () {
+  $("#menuimage").change(function(){
+			readURL(this);
+		});
+	loadgetOrders();
+	setInterval(getOrders,5000);
+});
+function order_list(){
+		$('#list_of_orders').removeClass('w3-animate-right w3-hide-small ');
+		$('#center_putahe').addClass('w3-hide-small');
+		$('#orderListBtn').addClass('w3-hide');
+
+		//return true;
+	}
+function order_list_rev(){
+		$('#list_of_orders').addClass('w3-animate-right w3-hide-small ');
+		$('#center_putahe').removeClass('w3-hide-small');
+		$('#orderListBtn').removeClass('w3-hide');
+
+		//return true;
+	}
+	
+$(function() {
+
+    var $sidebar   = $("#orderListBtn"), 
+        $window    = $(window),
+        offset     = $sidebar.offset(),
+        topPadding = 50;
+
+    $window.scroll(function() {
+        if ($window.scrollTop() > offset.top) {
+            $sidebar.stop().animate({
+                marginTop: $window.scrollTop() - offset.top + topPadding
+            });
+        } else {
+            $sidebar.stop().animate({
+                marginTop: 0
+            });
+        }
+    });
+    
+});
+	
+ 
+  function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img_preview_on_select').attr('src', e.target.result);
+				$('#new_menu_container').addClass('w3-half');
+				$('#preview_container').addClass('w3-rest');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
+	function getOrders(){
+		var dddata = $('#dddata').val();
+		var orderCounter = $("#orderCounter").val();
+		//alert(orderCounter);
+			//console.log(orderCounter);
+		$.ajax({
+			url:'orders.php',
+			type:'GET',
+			success:function(data){
+				if(orderCounter == dddata){
+					//alert("asdasdad");
+				}else{
+					$('#dddata').prop("value",data);
+					$("#ordersAppending").html(data);
+				}
+			}
+		})
+	}
+	function loadgetOrders(){
+		var dddata = $('#dddata').val();
+				console.log(dddata);
+		$.ajax({
+			url:'orders.php',
+			type:'GET',
+			success:function(data){
+				if(data == dddata){
+					//alert("asdasdad");
+				}else{
+					$('#dddata').prop("value",data);
+					$("#ordersAppending").html(data);
+				}
+			}
+		})
+	}
+
+
+</script>
 <style>
 .bar-item:hover{
 	border-bottom:2px solid #fff !important;
@@ -160,7 +254,9 @@ $(window).bind('scroll', function () {
 			<div class="w3-row" style=''>
 				<div class="w3-bar w3-purple w3-card-2" >
                  <a href="./" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Home</a>
-                 <a href="?reports" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Reports</a>
+                 <a href="?orders" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Orders</a>
+                  <a href="?billing" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Billing</a>
+                  <a href="?reports" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Reports</a>
                 
 				  <!-- <a href="#" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-small">Christorey Opao</a>-->
 				  <a href="#" class="w3-bar-item w3-button w3-text-white w3-hover-none w3-hover-text-white bar-item w3-hide-medium w3-hide-large"><i class="fa fa-user fa-1x"></i></a>
@@ -186,10 +282,10 @@ $(window).bind('scroll', function () {
 
 <!--------- MEnu Container ------>
 	<div class="w3-row">
-    
+    <?php if(isset($_GET['billing']) || isset($_GET['reports'])){ ?>
 		<!--- Side Menu List -->
 		<div class="w3-col s4 w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
-        <?php if(!isset($_GET['reports'])){ ?>
+        <?php if(isset($_GET['billing'])){ ?>
 			<h3 class="w3-hide-small w3-hide-medium"><strong class="w3-border-bottom">ORDER LISTS</strong></h3>
 			<strong class="w3-border-bottom w3-hide-large">ORDER LISTS</strong>
 			 <div class="w3-block">
@@ -216,7 +312,7 @@ $(window).bind('scroll', function () {
                     <a href="?order=<?php echo $row['orderID'];?>&tbl=<?php echo $row['tableNum']; ?>" class="w3-bar-item w3-button w3-small">Table #: <span class="w3-badge"><?php echo $row['tableNum'];?></span></a>
                     <?php } ?>
 			</div>
-            <?php }else{ ?>
+            <?php }else if(isset($_GET['reports'])){ ?>
             <div class="w3-row">
             <div class="w3-half">
             <label>Month:</label>
@@ -253,6 +349,8 @@ $(window).bind('scroll', function () {
            </div>
             <hr>
             <div id="reportsresult"></div>
+            <?php } else{ ?>
+            
             <?php } ?>
 		</div>
 		<!--- Side Menu List -->
@@ -316,7 +414,11 @@ $(window).bind('scroll', function () {
             <?php } ?>
 		
 		<!--- PUTAHE Container -->
-		
+		<?php }else{ ?> 
+        <div class="w3-col m12">
+        <div id="ordersAppending"></div>
+        </div>
+        <?php } ?>
 	</div>
 <!--------- MEnu Container ------>
 
@@ -325,4 +427,4 @@ $(window).bind('scroll', function () {
 <script type="application/javascript" src="../js/actions.js"></script>
 
 </body>
-</html>>>>
+</html>
