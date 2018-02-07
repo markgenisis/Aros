@@ -313,6 +313,7 @@ function confirmOrder(){
 }
 function serveOrder(){  
            var served = [];
+		   var orderID=$("#order_ID").val();
             $.each($("input[name='menuorder']:checked"), function(){            
                 served.push($(this).val());
             });
@@ -320,10 +321,10 @@ function serveOrder(){
        $.ajax({
 			type: "POST"  ,
 			url:"../include/actions.php",
-			data: "served="+served,
+			data: "served="+served+"&orderID="+orderID,
 			success: function(data){
-				console.log(data);
-				location.reload();
+				console.log(orderID);
+				//location.reload();
 			}
 		});
 }

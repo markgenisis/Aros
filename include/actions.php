@@ -146,7 +146,7 @@ if(isset($_POST['confirmOrder'])){
 	$num=mysqli_num_rows($sel);
 	$ordID=mysqli_fetch_assoc($sel);
 	if(!$num){
-		$insert=$mysqli->query("insert into orderid values ('NULL','$orderID','{$_SESSION['ACCESS_ID']}','{$_SESSION['table_num']}','$now','0','0')");
+		$insert=$mysqli->query("insert into orderid values ('NULL','$orderID','{$_SESSION['ACCESS_ID']}','{$_SESSION['table_num']}','$now','','','0','0')");
 		$_SESSION['ORDER_ID']=$orderID;
 	}else{
 	$_SESSION['ORDER_ID']=$ordID['orderID'];}
@@ -159,8 +159,11 @@ if(isset($_POST['confirmOrder'])){
 }
 if(isset($_POST['served'])){
 	$menus=explode(",",$_POST['served']);
+	$orderID=$_POST['orderID'];
+	$now=time();
 	foreach($menus as $key => $val){
 		$update=$mysqli->query("update orders set status='1' where id='$val'") or die(mysqli_error());
+		$updateServe=$mysqli->query("update orderid set servedtime='$now' where orderID='$orderID'") or die(mysqli_error());
 	}
 	if($update){
 		echo "SUCCESS";

@@ -282,7 +282,7 @@ $(window).bind('scroll', function () {
 
 <!--------- MEnu Container ------>
 	<div class="w3-row">
-    <?php if(isset($_GET['billing']) || isset($_GET['reports'])){ ?>
+    <?php if(isset($_GET['billing']) || isset($_GET['reports']) || isset($_GET['order'])){ ?>
 		<!--- Side Menu List -->
 		<div class="w3-col s4 w3-container w3-padding left_menu_container w3-bar-block w3-hide-small">
         <?php if(isset($_GET['billing'])){ ?>
@@ -416,6 +416,7 @@ $(window).bind('scroll', function () {
 		<!--- PUTAHE Container -->
 		<?php }else{ ?> 
         <div class="w3-col m12">
+        <input type="hidden" value="" id="dddata"/>
         <div id="ordersAppending"></div>
         </div>
         <?php } ?>

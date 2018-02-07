@@ -15,6 +15,7 @@ require("../include/functions.php");
 					$i++;
 				}$orderID[$i-1][$x]=$row['id'];
 				$x++;
+				$order_id=$row['orderID'];
 		}
 		//print_r($orderID);
 		$orderCounter2stat = 1;
@@ -42,6 +43,7 @@ require("../include/functions.php");
                         <?php } } ?>
                      </ul>
                  <hr>
+                 <input type="hidden" id="order_ID" value="<?php echo $order_id; ?>"  />
              <button class="w3-btn w3-purple w3-button w3-block" style="height:30px; padding-top:3px;" onClick="serveOrder();">Serve</button>    
             </div>
 			
