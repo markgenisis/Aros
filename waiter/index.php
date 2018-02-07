@@ -201,10 +201,30 @@ $(window).bind('scroll', function () {
 		<div class="w3-half putahe_container w3-padding" id="center_putahe">
 			<div class="w3-row-padding">
 			<?php if(isset($_GET['cat'])){
+				
+				?>
+				<table class="w3-table">
+					<thead>
+						<tr class="w3-bottombar w3-purple">
+							<th>Menu Name</th>
+							<th>Price</th>
+							<th style="text-align:center !important;">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+				<?php
 			 $menu=$mysqli->query("select * from menu where category='{$_GET['cat']}'");
 			 while($list=mysqli_fetch_assoc($menu)){
 			    ?>
-				<div class="w3-third" >
+				<tr>
+					<td><?php echo $list['menu']; ?></td>
+					<td><?php echo number_format($list['price'],2); ?></td>
+					<td>
+						<button class="w3-btn w3-teal w3-block add_odrder_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
+					</td>
+				</tr>
+				<!--<div class="w3-third" >
 					<div class="w3-row">
 						<div style="border:1px dashed #909090;padding:0px 20px; margin-top:5%" >
 							<div class="">
@@ -214,9 +234,11 @@ $(window).bind('scroll', function () {
 							  <img src="../images/<?php echo $list['image']; ?>" width="100%" height="150"/>
 								<div class="w3-purple w3-text-shadow" style="width: 100%;text-align: center;padding: 5px 0;text-shadow:1px 1px 0 #444">&#x20B1; <?php echo number_format($list['price'],2); ?></div>
 							</div>
-							<div class="" style="position:relative;top:7px">
-								<button class="w3-btn w3-teal w3-block add_odrder_btn" id="" onClick="document.getElementById('menu_<?php echo $list['id']; ?>').style.display='block'">Add to Orders</button>
-                                
+						
+						</div>
+					</div>
+				</div>-->
+					<div class="" style="position:relative;top:7px">                                
                                 <!-- The Modal -->
                                     <div id="menu_<?php echo $list['id']; ?>" class="w3-modal" >
                                       <div class="w3-modal-content w3-animate-top" style="max-width:400px;">
@@ -227,7 +249,7 @@ $(window).bind('scroll', function () {
                                         </div>
                                         <div class="w3-container w3-padding">
                                         <input type="hidden" id="menu_id_<?php echo $list['id']; ?>" value="<?php echo $list['id']; ?>" >
-                                         <label>Select Quantity:</label>
+                                         <label style="color:black !important;">Select Quantity:</label>
                                           <input type="number" class="w3-input" id="quantity_<?php echo $list['id']; ?>">
                                           	 
                                           <button class="w3-green w3-btn w3-margin-top" onClick="addOrder(<?php echo $list['id']; ?>);">Add to Orders</button>
@@ -236,10 +258,9 @@ $(window).bind('scroll', function () {
                                     </div>
                                     
 							</div>
-						</div>
-					</div>
-				</div>
 			<?php } }?>	
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<!--- PUTAHE Container -->
