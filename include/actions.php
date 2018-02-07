@@ -249,3 +249,11 @@ if(isset($_POST['daily'])){
     </table>
     <?php
 }
+if(isset($_POST['billout'])){
+	$orderID=$_POST['billout'];
+	$now=time();
+	$sql=$mysqli->query("update orderid set billouttime='$now' where orderID='$orderID'") or die(mysqli_error());
+	if($sql){
+		echo "SUCCESS";
+	}
+}

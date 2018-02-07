@@ -440,3 +440,16 @@ function dailyReports(x){
 		}
 	});
 }
+function billout(x){
+	$.ajax({
+		type: "POST",
+		url: "../include/actions.php",
+		data: "billout="+x,
+		success: function(data){
+			console.log(data);
+			if(data=="SUCCESS"){
+				$("#billoutBTN").prop("disabled","disabled");
+			}
+		}
+	});
+}

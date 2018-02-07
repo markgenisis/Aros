@@ -16,6 +16,8 @@
 			  $total=0; $servedNum=0;
 			  if(isset($_SESSION['table_num'])){
 			  $orders=$mysqli->query("select * from orders where tableID='{$_SESSION['table_num']}' and paid='0' and waiterID='{$_SESSION['ACCESS_ID']}'");
+			   $orders1=$mysqli->query("select * from orders where tableID='{$_SESSION['table_num']}' and paid='0' and waiterID='{$_SESSION['ACCESS_ID']}'");
+			  $orderID=mysqli_fetch_assoc($orders1);
 			  $num=mysqli_num_rows($orders);
 			  while($or=mysqli_fetch_assoc($orders)){ ?>
 				  <li class="w3-text-deep-purple"> <span class="w3-badge"><?php echo $or['quantity']; ?> </span> <?php getMenu($or['menuID']); ?> <span class='w3-right'><?php echo number_format((getPrice($or['menuID'])*$or['quantity']),2); ?> <span ><img src="../images/<?php echo getStatus($or['status']); ?>" width="25"></span><?php if($or['status'] == '3'){ ?> <a href='javascript:void(0);' onClick="removeDBOrder(<?php echo $or['id']; ?>) ;"><i class="fa fa-remove fa-fx w3-hover-text-red"></i></a><?php } ?></span></li>
@@ -34,4 +36,4 @@
 			  ?>
 			</ul>
              <hr>
-            <div class="w3-left"><button class="w3-btn w3-purple" onClick="confirmOrder();" id="confirmOrderBtn" disabled>Confirm Orders</button>&nbsp;<?php if($servedNum){if($num == $servedNum){?><button class="w3-btn w3-green">Bill Out</button><?php } }?></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
+            <div class="w3-left"><button class="w3-btn w3-purple" onClick="confirmOrder();" id="confirmOrderBtn" disabled>Confirm Orders</button>&nbsp;<?php if($servedNum){if($num == $servedNum){?><button class="w3-btn w3-green" id="billoutBTN" onclick="billout('<?php echo $orderID['orderID']; ?>');">Bill Out</button><?php } }?></div><div class="w3-right w3-text-blue-gray">Total: Php <?php echo number_format($total,2); ?></div>
