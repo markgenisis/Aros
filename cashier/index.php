@@ -1,8 +1,8 @@
 <?php
  include "../include/dbconn.php";
- if($_SESSION['ACCESS_TYPE']!='2'){
-	header("location:../");
-	die();
+	if($_SESSION['ACCESS_TYPE']!='2'){
+		header("location:../");
+		die();
 	}
 ?>
 <!DOCTYPE html>
